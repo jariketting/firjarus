@@ -1,0 +1,44 @@
+﻿@page "/login"
+
+@inject NavigationManager _navigationManager;
+@inject CustomAuthenticationStateProvider _authenticationStateProvider;
+
+@attribute [AllowAnonymous]
+
+<div class="container login-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Login</h4>
+                </div>
+                <div class="card-body">
+                    <EditForm Model="AuthRequest" OnSubmit=@FormSubmittedAsync>
+                        <div class="form-group">
+                            <label for="username">Email:</label>
+                            <InputText type="email" @bind-Value=AuthRequest.Email id="Email" class="form-control" required></InputText>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="password">Password:</label>
+                            <InputText type="password" @bind-Value=AuthRequest.Password id="Password" class="form-control" required></InputText>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mt-3">
+                            Login 
+                            @if(loginLoading) {
+                                <div class="spinner-border spinner-border-sm"></div>
+                            }
+                        </button>
+                    </EditForm>
+
+                    @if(!string.IsNullOrEmpty(error))
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            @error
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

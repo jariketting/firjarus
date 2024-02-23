@@ -1,0 +1,23 @@
+﻿@page "/"
+
+@inject CustomAuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Home</PageTitle>
+
+<h1>Welkom @username</h1>
+
+
+Welcome to your new app.
+
+
+@code {
+    string username;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        username = user.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+    }
+}
