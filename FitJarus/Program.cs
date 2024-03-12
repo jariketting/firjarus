@@ -12,9 +12,9 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddSingleton<RequestHelper>();
 builder.Services.AddSingleton<Secrets>();
+builder.Services.AddSingleton<CookieHelper>();
 
 builder.Services.AddScoped<CustomAuthenticationStateProvider>();
-builder.Services.AddScoped<CookieHelper>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<CustomAuthenticationStateProvider>());
 
 var http = new HttpClient()

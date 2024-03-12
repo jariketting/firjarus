@@ -1,4 +1,7 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.JSInterop;
+
+using System.Security.Claims;
 
 namespace FitJarus.Helpers;
 
@@ -40,5 +43,19 @@ public class CookieHelper
     {
         await WaitForReference();
         await _accessorJsRef.Value.InvokeVoidAsync("set", key, value);
+    }
+
+    public async Task<string> GetAuthCookie()
+    {
+        string tokenCookie = await GetValueAsync<string>("token");
+        string tokenStart = "token=";
+
+        int index = tokenCookie.IndexOf(tokenStart);
+        if (index != -1)
+        {
+            return tokenCookie.Substring(index + tokenStart.Length);
+        }
+
+        return "";
     }
 }

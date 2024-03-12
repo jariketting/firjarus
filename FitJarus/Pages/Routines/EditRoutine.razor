@@ -1,0 +1,23 @@
+﻿@page "/routines/edit/{id?}"
+
+@using FitJarus.Helpers
+
+@inject NavigationManager NavigationManager
+@inject RequestHelper RequestHelper
+
+<h3>Add new workout routine</h3>
+
+<EditForm Model="@FormData" OnValidSubmit="@HandleSubmit" class="container">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <InputText required="required" id="name" @bind-Value="FormData.Name" class="form-control" />
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" id="active" @bind="FormData.Active" class="form-check-input" />
+        <label for="active" class="form-check-label">Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+    <button type="button" @onclick="OnCancel" class="btn btn-secondary">Cancel</button>
+</EditForm>

@@ -1,0 +1,18 @@
+﻿@page "/routines"
+@using FitJarus.Helpers
+
+@inject NavigationManager NavigationManager
+@inject RequestHelper RequestHelper
+
+<h3>Routines</h3>
+
+<button @onclick="() => GoToEditPage()" class="btn btn-primary">Add new routine</button>
+
+@foreach(var routine in RoutineList)
+{
+    <p>
+        @routine.Key - @routine.Value.Active - @routine.Value.Name
+        <button @onclick="() => GoToEditPage(routine.Key)" class="btn btn-primary">Edit</button>
+        <button @onclick="() => Delete(routine.Key)" class="btn btn-danger">Delete</button>
+    </p>
+}
